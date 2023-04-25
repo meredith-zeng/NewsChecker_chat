@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chatbot</title>
+</head>
+<body>
+  <div>
+    <div>
+      <input id="user-input" type="text" placeholder="Type your message..." />
+      <button id="send-btn">Send</button>
+    </div>
+    <div id="chat-output"></div>
+  </div>
+</body>
+</html>
+<script>
+document.getElementById("send-btn").addEventListener("click", async () => {
+  const userInput = document.getElementById("user-input").value;
+  console.log(userInput)
+
+  if (userInput.trim() !== "") {
+    // Display user input
+    const chatOutput = document.getElementById("chat-output");
+    chatOutput.innerHTML += `<div><strong>You:</strong> ${userInput}</div>`;
+
+    // Send user input to server and get chatbot response
+    const response = await fetch('/api/chat', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ message: userInput }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('Response data:', data);
+        chatOutput.innerHTML += `<div><strong>Bot:</strong> ${data}</div>`;
+        document.getElementById("user-input").value = "";
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  }
+});
+</script>
