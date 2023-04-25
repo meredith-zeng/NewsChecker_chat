@@ -18,13 +18,19 @@ OPENAI_API_KEY=
    $ . venv/bin/activate
    ```
 
-3. run the following code
+3. install flask-cors
 
    ```bash
    $ pip install Flask flask-cors openai
    ```
-4. Run the app:
+4. install python-dotenv
 
    ```bash
    $ pip install python-dotenv
+   ```
+   
+5. run the app
+
+   ```bash
+   $ flask run
    ```
