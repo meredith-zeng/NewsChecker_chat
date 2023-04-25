@@ -1,4 +1,7 @@
 # NewsChecker_chat
+## Power by chatGPT
+Call the API of open ai to build your own chatbot
+
 ## Setup
 1. create .env file and add your api key to the newly created `.env` file.
 ```
