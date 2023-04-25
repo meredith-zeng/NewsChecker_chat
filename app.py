@@ -5,6 +5,7 @@ import os
 
 # Set up your OpenAI API key
 openai.api_key = os.getenv("OPENAI_API_KEY")
+
 model = "gpt-3.5-turbo"
 app = Flask(__name__)
 CORS(app, resources={r"/api/*": {"origins": "*"}})
@@ -20,7 +21,10 @@ def chat():
     # Generate response using OpenAI API
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
-        messages=[{"role": "user", "content": message}],
+        messages=[
+            {"role": "system", "content": "你是一个调查新闻真假的记者。我将给你一条新闻和出处，请判断新闻真假的可能性。"},
+            {"role": "user", "content": message}
+        ],
         max_tokens=1024,
         temperature=0.5,
         n=1,

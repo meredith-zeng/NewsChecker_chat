@@ -4,17 +4,93 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Chatbot</title>
+
+  <!-- Include Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <style>
+    body {
+      background-color: #f8f9fa;
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: auto;
+      padding: 50px 20px;
+    }
+
+    .card {
+      margin-bottom: 20px;
+    }
+
+    .card-header {
+      background-color: #007bff;
+      color: #fff;
+      font-weight: bold;
+    }
+
+    .form-control {
+      border-radius: 0;
+      box-shadow: none;
+      border-color: #aaa;
+    }
+
+    .input-group-append button {
+      border-radius: 0;
+    }
+
+    #chat-output {
+      height: 550px;
+      overflow-y: scroll;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      padding: 10px;
+    }
+
+    #chat-output div {
+      margin-bottom: 10px;
+    }
+
+    #chat-output div strong {
+      font-weight: bold;
+      margin-right: 10px;
+    }
+
+    #chat-output .bot {
+      text-align: right;
+    }
+
+    #chat-output .bot div {
+      background-color: #f7f7f7;
+      color: #555;
+    }
+  </style>
+
 </head>
 <body>
-  <div>
-    <div>
-      <input id="user-input" type="text" placeholder="Type your message..." />
-      <button id="send-btn">Send</button>
+  <div class="container">
+    <div class="card">
+      <div class="card-header">
+        Fake News Check Assistant
+      </div>
+      <div class="card-body">
+        <p class="card-text">我是一个调查新闻真假的助手。你可以给我一条新闻和出处，我会借助chatGPT的力量来判断新闻真假。</p>
+        <div class="input-group">
+          <textarea id="user-input" class="form-control" placeholder="输入消息..." rows="5" cols="50"></textarea>
+          <div class="input-group-append">
+            <button id="send-btn" class="btn btn-primary">发送</button>
+          </div>
+        </div>
+      </div>
     </div>
+
     <div id="chat-output"></div>
   </div>
 </body>
 </html>
+<!-- Include Bootstrap JavaScript -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script>
 document.getElementById("send-btn").addEventListener("click", async () => {
   const userInput = document.getElementById("user-input").value;
@@ -39,9 +115,6 @@ document.getElementById("send-btn").addEventListener("click", async () => {
         chatOutput.innerHTML += `<div><strong>Bot:</strong> ${data}</div>`;
         document.getElementById("user-input").value = "";
       })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
   }
 });
 </script>
